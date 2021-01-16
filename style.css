@@ -1,0 +1,27 @@
+.flex-header {
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 500px;
+}
+
+.vue-logo {
+    display: inline-block;
+    height: 52px;
+    width: 60px;
+    margin-top: 10px;
+    background: url(./assets/vue.png);
+    background-size: cover;
+    margin-right: -7px;
+}
+
+.title-text {
+    display:inline-block;
+    font-family: monospace;
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 50px;
+   
+}
