@@ -17,11 +17,18 @@
     <div id="content"></div>
     <script>
         new Vue({
-          data: () => ({ message: 'Row' }),
+          data: () => ({ 
+        message: 'Row',
+        questions: [ 
+            { id: 1 }, 
+            { id: 2 } 
+
+        ]}),
           template: `
           <div>
             <h1>{{message}} your boat</h1>
             <button v-on:click="message += ' row'">Add</button>
+            <h3>{{questions[1].id}}</h3>
           </div>
           `
         }).$mount('#content');
