@@ -14,5 +14,17 @@
         <div class="vue-logo"></div>
         <p class="title-text">ue know?</p>
     </header>
+    <div id="content"></div>
+    <script>
+        new Vue({
+          data: () => ({ message: 'Row' }),
+          template: `
+          <div>
+            <h1>{{message}} your boat</h1>
+            <button v-on:click="message += ' row'">Add</button>
+          </div>
+          `
+        }).$mount('#content');
+      </script>
 </body>
 </html>
