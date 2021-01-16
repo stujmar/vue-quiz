@@ -1,10 +1,18 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .flex-header {
     display:flex;
+    padding: 50px;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    width: 500px;
+    width: 100%;
+    border-bottom: 1px solid rgb(0, 80, 67);
 }
 
 .vue-logo {
@@ -18,10 +26,11 @@
 }
 
 .title-text {
+    color: rgb(0, 80, 67);
     display:inline-block;
-    font-family: monospace;
+    font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
     font-size: 1.5rem;
-    font-weight: bold;
+    font-weight: 100;
     line-height: 50px;
    
 }
