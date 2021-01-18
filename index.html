@@ -22,6 +22,11 @@
           mounted:function(){
             console.log("Vue Loaded");
           },
+          methods: {
+            answerSubmit(answerId) {
+              console.log(answerId);
+            }
+          },
           data: () => ({ 
         message: 'Row',
         questions: [ 
@@ -43,7 +48,7 @@
             <button v-on:click="message += ' row'">Add</button>
             <h3>Question # {{questions[1].id}}</h3>
             <input type="text">
-            <button v-for="button in buttons" :key="button.id">{{button.name}}</button>
+            <button v-for="button in buttons" :key="button.id" v-on:click="answerSubmit(button.id)">{{button.name}}</button>
             
           </div>
           `
