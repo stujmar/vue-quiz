@@ -22,27 +22,22 @@
         Vue.config.devtools = true
         new Vue({ 
           created: function () {
-            console.log('created');
-            this.dataLoad();
-          //   this.readTextFile("./data.json", function(text){
-          //   var data = JSON.parse(text);
-          //   console.log("from XML", data);
-          // });
-          // fetch('./data.json', {
-          //   method: "GET",
-          //   credentials:"include",
-          //   mode: 'no-cors',
-          //   headers: {"Content-Type": "application/json"}
-          // })
-          //   .then(response =>  console.log(response))
-          //   // .then(res=> console.log("From fetch", res));
-          // console.log(this.message);
-            console.log(data);
+            console.log('Vue created'); // Start here.
+            // Load the data.
             this.data = data;
+            // Pick a random start question
+            let maxNum = this.data.length; // From the data length.
+            let randomSeed = Math.floor(Math.random() * (maxNum)); // Pick a random Id.
+            this.activeId = randomSeed; // Set first question as active id.
+            // Pull Random Wrong answer.
+
+            // Set active buttons.
+            this.buttons = [...this.buttons, { id: this.data[this.activeId].id, answer: this.data[this.activeId].answer }]
+
           },
           mounted: function(){
             // this.message = "loaded";
-            console.log("Vue Loaded", this.buttons);
+            console.log("Vue mounted", this.buttons);
 
 
           },
@@ -54,35 +49,25 @@
                 name: "button four"
               })
             },
-
-            readTextFile(file, callback) {
-              let rawFile = new XMLHttpRequest();
-              rawFile.overrideMimeType("application/json");
-              rawFile.open("GET", file, true);
-              rawFile.onreadystatechange = function() {
-                  if (rawFile.readyState === 4 && rawFile.status == "200") {
-                      callback(rawFile.responseText);
-                  }
-              }
-              rawFile.send(null);
-            },
-            getRandomAnswer() {
+            getRandomQuestion() {
               console.log(this.data.length)
               let maxNum = this.data.length;
               let randomSeed = Math.floor(Math.random() * (maxNum));
               console.log(randomSeed); 
               this.activeId = randomSeed;
+              this.setAnswers();
               return randomSeed;
             },
-            dataLoad() {
-              console.log("get answers");
-              console.log("get questions");
-              console.log("set answers");
-              console.log("set questions");
-              console.log("set the question");
-              console.log("set answer button");
-              this.buttons = [...this.buttons, { id: 4,
-            name: "button four"}];
+            getWrongAnswer(idsToExclude) {
+              let randomId = Math.floor(Math.random() * (this.data.length));
+              while (idsToExclude.filter(id => id == randomId)) {
+                randomId = Math.floor(Math.random() * (this.data.length));
+              }
+              return randomId;
+            },
+            setAnswers() {
+              console.log("Right answer", this.activeId);
+              //this.buttons = [...this.buttons, {id:4, name: "correct"}];
             }
           },
           data: () => ({ 
@@ -91,19 +76,19 @@
         answered: [],
         data: [],
         buttons: [{ id: 1,
-            name: "button One"},
+            answer: "button One"},
           { id: 2,
-            name: "button Two"},
+            answer: "button Two"},
           { id: 3,
-            name: "button Three"}
+            answer: "button Three"}
           ]}),
           template: `
           <div>
             <h1>{{message}} your boat</h1>
             <button v-on:click="message += ' row'">Add</button>
-            <h3>Question id {{data[getRandomAnswer()].id}}</h3>
+            <h3>Question: {{data[activeId].question}}</h3>
             <input type="text">
-            <button v-for="button in buttons" :key="button.id" v-on:click="answerSubmit(button.id)">{{button.name}}</button> <br>
+            <button v-for="button in buttons" :key="button.id" v-on:click="answerSubmit(button.id)">{{button.answer}}</button> <br>
             <button  v-on:click="dataLoad()">refresh</button>
           </div>
           `
