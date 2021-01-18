@@ -6,6 +6,7 @@
     <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x"></script>
+    <script type="text/javascript" src="data.js"></script>
     <title>Vue | Quiz</title>
 </head>
 <body>
@@ -27,18 +28,22 @@
           //   var data = JSON.parse(text);
           //   console.log("from XML", data);
           // });
-          fetch('https://gostugo.com/vue/data.json', {
-            method: "GET",
-            // mode: 'no-cors',
-            headers: {"Content-Type": "application/json"}
-          })
-            .then(response =>  console.log(response))
-            // .then(res=> console.log("From fetch", res));
-          console.log(this.message);
+          // fetch('./data.json', {
+          //   method: "GET",
+          //   credentials:"include",
+          //   mode: 'no-cors',
+          //   headers: {"Content-Type": "application/json"}
+          // })
+          //   .then(response =>  console.log(response))
+          //   // .then(res=> console.log("From fetch", res));
+          // console.log(this.message);
+            console.log(data);
+            this.data = data;
           },
           mounted: function(){
             // this.message = "loaded";
             console.log("Vue Loaded", this.buttons);
+
 
           },
           methods: {
@@ -62,8 +67,9 @@
               rawFile.send(null);
             },
             getRandomAnswer() {
-              let maxNum = 5;
-              let randomSeed = Math.floor(Math.random() * maxNum) /*+ 1*/;
+              console.log(this.data.length)
+              let maxNum = this.data.length;
+              let randomSeed = Math.floor(Math.random() * (maxNum));
               console.log(randomSeed); 
               this.activeId = randomSeed;
               return randomSeed;
@@ -95,7 +101,7 @@
           <div>
             <h1>{{message}} your boat</h1>
             <button v-on:click="message += ' row'">Add</button>
-            <h3>Question id {{questions[getRandomAnswer()].id}}</h3>
+            <h3>Question id {{data[getRandomAnswer()].id}}</h3>
             <input type="text">
             <button v-for="button in buttons" :key="button.id" v-on:click="answerSubmit(button.id)">{{button.name}}</button> <br>
             <button  v-on:click="dataLoad()">refresh</button>
