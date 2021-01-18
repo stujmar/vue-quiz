@@ -20,28 +20,37 @@
     <script>
         new Vue({
           mounted:function(){
-            console.log("Vue Loaded");
+            console.log("Vue Loaded", this.buttons);
           },
           methods: {
             answerSubmit(answerId) {
               console.log(answerId);
+              this.buttons.push({
+                id: 4,
+                name: "button four"
+              })
+            },
+            getRandomAnswer() {
+              let maxNum = 6;
+              let randomSeed = Math.floor(Math.random() * maxNum) + 1;
+              console.log("randomSeed") 
+              return randomSeed;
             }
           },
           data: () => ({ 
         message: 'Row',
         questions: [ 
             { id: 1 }, 
-            { id: 2 } 
-
+            { id: 2 },
+            { id: 3}
         ],
-        buttons: [
-          { id: 1,
+        buttons: [{ id: 1,
             name: "button One"},
           { id: 2,
             name: "button Two"},
           { id: 3,
             name: "button Three"}
-        ]}),
+          ]}),
           template: `
           <div>
             <h1>{{message}} your boat</h1>
