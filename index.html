@@ -6,7 +6,6 @@
     <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x"></script>
-    <script src="./data.json"></script>
     <title>Vue | Quiz</title>
 </head>
 <body>
@@ -24,13 +23,17 @@
           created: function () {
             console.log('created');
             this.dataLoad();
-            this.readTextFile("./data.json", function(text){
-            var data = JSON.parse(text);
-            console.log("from XML", data);
-          });
-          fetch("./data.json")
+          //   this.readTextFile("./data.json", function(text){
+          //   var data = JSON.parse(text);
+          //   console.log("from XML", data);
+          // });
+          fetch('./data.json', {
+            method: "GET",
+            headers: {"Content-Type": "application/json"}
+          })
             .then(response => response.json())
             .then(json => console.log("From fetch", json));
+          
           },
           mounted: function(){
             // this.message = "loaded";
