@@ -27,13 +27,14 @@
           //   var data = JSON.parse(text);
           //   console.log("from XML", data);
           // });
-          fetch('./data.json', {
+          fetch('https://gostugo.com/vue/data.json', {
             method: "GET",
+            // mode: 'no-cors',
             headers: {"Content-Type": "application/json"}
           })
-            .then(response => response.json())
-            .then(json => console.log("From fetch", json));
-          
+            .then(response =>  console.log(response))
+            // .then(res=> console.log("From fetch", res));
+          console.log(this.message);
           },
           mounted: function(){
             // this.message = "loaded";
@@ -81,20 +82,8 @@
           data: () => ({ 
         message: 'Row',
         activeId: 0,
-        questions: [ 
-            { id: 0},
-            { id: 1 }, 
-            { id: 2 },
-            { id: 3},
-            { id: 4},
-        ],
-        answers: [ 
-            { id: 0},
-            { id: 1 }, 
-            { id: 2 },
-            { id: 3},
-            { id: 4},
-        ],
+        answered: [],
+        data: [],
         buttons: [{ id: 1,
             name: "button One"},
           { id: 2,
