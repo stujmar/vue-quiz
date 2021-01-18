@@ -34,7 +34,8 @@
             getRandomAnswer() {
               let maxNum = 5;
               let randomSeed = Math.floor(Math.random() * maxNum) /*+ 1*/;
-              console.log("randomSeed") 
+              console.log(randomSeed); 
+              this.activeId = randomSeed;
               return randomSeed;
             }
           },
@@ -42,18 +43,18 @@
         message: 'Row',
         activeId: 0,
         questions: [ 
+            { id: 0},
             { id: 1 }, 
             { id: 2 },
             { id: 3},
             { id: 4},
-            { id: 5}
         ],
         answers: [ 
+            { id: 0},
             { id: 1 }, 
             { id: 2 },
             { id: 3},
             { id: 4},
-            { id: 5}
         ],
         buttons: [{ id: 1,
             name: "button One"},
@@ -66,7 +67,7 @@
           <div>
             <h1>{{message}} your boat</h1>
             <button v-on:click="message += ' row'">Add</button>
-            <h3>Question # {{questions[getRandomAnswer()].id}}</h3>
+            <h3>Question id {{questions[getRandomAnswer()].id}}</h3>
             <input type="text">
             <button v-for="button in buttons" :key="button.id" v-on:click="answerSubmit(button.id)">{{button.name}}</button>
             
