@@ -39,10 +39,7 @@
           methods: {
             answerSubmit(answerId) {
               console.log(answerId);
-              this.buttons.push({
-                id: 4,
-                name: "button four"
-              })
+              this.buttons.push(4)
             },
             getRandomQuestion() {
               console.log(this.data.length)
@@ -53,24 +50,27 @@
               this.setAnswers();
               return randomSeed;
             },
-            getWrongId(idsToExclude) {
+            getWrongId() {
+              let idsToExclude = [...this.answered, this.activeId];
               let randomId = Math.floor(Math.random() * (this.data.length));
               while (idsToExclude.includes(randomId)) {
-                console.log("here");
                 randomId = Math.floor(Math.random() * (this.data.length));
               }
               return randomId;
             },
             resetButtons() {
               console.log("Right answer", this.activeId);
-              let wrongOne = this.getWrongId(this.answered.push(this.activeId));
-              this.buttons = [...this.buttons, { id: this.data[this.activeId].id, answer: this.data[this.activeId].answer }]
+              console.log("activeId", this.activeId);
+              let wrongOne = this.getWrongId();
+              let wrongTwo = this.getWrongId();
+              console.log("here", this.activeId);
+              this.buttons = [{ id: this.data[this.activeId].id, answer: this.data[this.activeId].answer }]
             }
           },
           data: () => ({ 
         message: 'Row',
         activeId: 0,
-        answered: [],
+        answered: [4],
         data: [],
         buttons: []
       }),
@@ -80,7 +80,7 @@
             <button v-on:click="message += ' row'">Add</button>
             <h3>Question: {{data[activeId].question}}</h3>
             <input type="text">
-            <button v-for="button in buttons" :key="button.id" v-on:click="answerSubmit(button.id)">{{button.answer}}</button> <br>
+            <button v-for="button in buttons" :key="button.id" v-on:click="answerSubmit(button)">{{this.data[button.id].answer}}</button> <br>
             <button  v-on:click="dataLoad()">refresh</button>
           </div>
           `
