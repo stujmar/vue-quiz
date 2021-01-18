@@ -29,16 +29,11 @@
             let maxNum = this.data.length; // From the data length.
             let randomSeed = Math.floor(Math.random() * (maxNum)); // Pick a random Id.
             this.activeId = randomSeed; // Set first question as active id.
-            // Pull Random Wrong answer.
-
-            // Set active buttons.
-            this.buttons = [...this.buttons, { id: this.data[this.activeId].id, answer: this.data[this.activeId].answer }]
-
           },
           mounted: function(){
             // this.message = "loaded";
-            console.log("Vue mounted", this.buttons);
-
+            console.log("Vue mounted");
+            this.resetButtons();
 
           },
           methods: {
@@ -58,16 +53,18 @@
               this.setAnswers();
               return randomSeed;
             },
-            getWrongAnswer(idsToExclude) {
+            getWrongId(idsToExclude) {
               let randomId = Math.floor(Math.random() * (this.data.length));
-              while (idsToExclude.filter(id => id == randomId)) {
+              while (idsToExclude.includes(randomId)) {
+                console.log("here");
                 randomId = Math.floor(Math.random() * (this.data.length));
               }
               return randomId;
             },
-            setAnswers() {
+            resetButtons() {
               console.log("Right answer", this.activeId);
-              //this.buttons = [...this.buttons, {id:4, name: "correct"}];
+              let wrongOne = this.getWrongId(this.answered.push(this.activeId));
+              this.buttons = [...this.buttons, { id: this.data[this.activeId].id, answer: this.data[this.activeId].answer }]
             }
           },
           data: () => ({ 
@@ -75,13 +72,8 @@
         activeId: 0,
         answered: [],
         data: [],
-        buttons: [{ id: 1,
-            answer: "button One"},
-          { id: 2,
-            answer: "button Two"},
-          { id: 3,
-            answer: "button Three"}
-          ]}),
+        buttons: []
+      }),
           template: `
           <div>
             <h1>{{message}} your boat</h1>
