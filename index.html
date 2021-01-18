@@ -19,9 +19,15 @@
     </div>
     <script>
         Vue.config.devtools = true
-        new Vue({
+        new Vue({ 
+          created: function () {
+            console.log('created');
+            this.dataLoad();
+          },
           mounted:function(){
+            // this.message = "loaded";
             console.log("Vue Loaded", this.buttons);
+
           },
           methods: {
             answerSubmit(answerId) {
@@ -37,6 +43,16 @@
               console.log(randomSeed); 
               this.activeId = randomSeed;
               return randomSeed;
+            },
+            dataLoad() {
+              console.log("get answers");
+              console.log("get questions");
+              console.log("set answers");
+              console.log("set questions");
+              console.log("set the question");
+              console.log("set answer button");
+              this.buttons = [...this.buttons, { id: 4,
+            name: "button four"}];
             }
           },
           data: () => ({ 
@@ -69,8 +85,8 @@
             <button v-on:click="message += ' row'">Add</button>
             <h3>Question id {{questions[getRandomAnswer()].id}}</h3>
             <input type="text">
-            <button v-for="button in buttons" :key="button.id" v-on:click="answerSubmit(button.id)">{{button.name}}</button>
-            
+            <button v-for="button in buttons" :key="button.id" v-on:click="answerSubmit(button.id)">{{button.name}}</button> <br>
+            <button  v-on:click="dataLoad()">refresh</button>
           </div>
           `
         }).$mount('#content');
