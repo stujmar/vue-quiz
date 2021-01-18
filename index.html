@@ -25,6 +25,11 @@
             { id: 1 }, 
             { id: 2 } 
 
+        ],
+        buttons: [
+          {name: "button One"},
+          {name: "button Two"},
+          {name: "button Three"}
         ]}),
           template: `
           <div>
@@ -32,6 +37,7 @@
             <button v-on:click="message += ' row'">Add</button>
             <h3>Question # {{questions[1].id}}</h3>
             <input type="text">
+            
           </div>
           `
         }).$mount('#content');
