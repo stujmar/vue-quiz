@@ -39,7 +39,7 @@
           methods: {
             answerSubmit(answerId) {
               console.log(answerId);
-              this.buttons.push(4)
+              // this.buttons.push(4)
             },
             getRandomQuestion() {
               console.log(this.data.length)
@@ -52,25 +52,45 @@
             },
             getWrongId() {
               let idsToExclude = [...this.answered, this.activeId];
+              
               let randomId = Math.floor(Math.random() * (this.data.length));
-              while (idsToExclude.includes(randomId)) {
+              while (idsToExclude.includes(randomId) || this.buttons.includes(randomId)) {
                 randomId = Math.floor(Math.random() * (this.data.length));
               }
+              this.buttons = [...this.buttons, randomId];
               return randomId;
             },
+            shuffle(array) {
+                let currentIndex = array.length, temporaryValue, randomIndex;
+
+                // While there remain elements to shuffle...
+                while (0 !== currentIndex) {
+
+                  // Pick a remaining element...
+                  randomIndex = Math.floor(Math.random() * currentIndex);
+                  currentIndex -= 1;
+
+                  // And swap it with the current element.
+                  temporaryValue = array[currentIndex];
+                  array[currentIndex] = array[randomIndex];
+                  array[randomIndex] = temporaryValue;
+                }
+
+                return array;
+            }
+            ,
             resetButtons() {
-              console.log("Right answer", this.activeId);
-              console.log("activeId", this.activeId);
               let wrongOne = this.getWrongId();
               let wrongTwo = this.getWrongId();
-              console.log("here", this.activeId);
-              this.buttons = [{ id: this.data[this.activeId].id, answer: this.data[this.activeId].answer }]
+              console.log("here", this.activeId, wrongOne, wrongTwo);
+              this.buttons = [...this.buttons, this.data[this.activeId].id];
+              this.buttons = this.shuffle(this.buttons);
             }
           },
           data: () => ({ 
         message: 'Row',
         activeId: 0,
-        answered: [4],
+        answered: [],
         data: [],
         buttons: []
       }),
@@ -80,7 +100,7 @@
             <button v-on:click="message += ' row'">Add</button>
             <h3>Question: {{data[activeId].question}}</h3>
             <input type="text">
-            <button v-for="button in buttons" :key="button.id" v-on:click="answerSubmit(button)">{{this.data[button.id].answer}}</button> <br>
+            <button v-for="button in buttons" :key="button" v-on:click="answerSubmit(button)">{{this.data[button].answer}}</button> <br>
             <button  v-on:click="dataLoad()">refresh</button>
           </div>
           `
