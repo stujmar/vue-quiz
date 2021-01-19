@@ -25,7 +25,7 @@
     margin-right: -7px;
 }
 
-.title-text {
+.title-text, .question, .answer {
     color: rgb(0, 80, 67);
     display:inline-block;
     font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
@@ -37,4 +37,37 @@
 
 .quiz-body {
     padding: 30px;
+}
+
+.question {
+    text-align: center;
+    margin: 0 auto 40px;
+    max-width: 600px;
+    display: block;
+    line-height: 30px;
+}
+.buttonTray {
+    width:100%;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.answer {
+    font-weight: bold;
+    margin: 20px;
+    padding: 0 10px;
+    border-style: inset;
+    border: 1px solid rgb(0, 80, 67);
+}
+
+.answer:hover {
+    background: #4fc08d;   
+}
+
+.answer:focus {
+    outline: none;
+    border-style: inset;
+    border: 1px solid rgb(0, 80, 67);
+    box-shadow: 0 0 0 2px rgb(0, 80, 67);
 }

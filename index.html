@@ -33,13 +33,12 @@
           mounted: function(){
             // this.message = "loaded";
             console.log("Vue mounted");
-            this.resetButtons();
+            this.setButtons();
 
           },
           methods: {
             answerSubmit(answerId) {
-              console.log(answerId);
-              // this.buttons.push(4)
+              console.log(answerId == this.activeId);
             },
             getRandomQuestion() {
               console.log(this.data.length)
@@ -79,7 +78,7 @@
                 return array;
             }
             ,
-            resetButtons() {
+            setButtons() {
               let wrongOne = this.getWrongId();
               let wrongTwo = this.getWrongId();
               console.log("here", this.activeId, wrongOne, wrongTwo);
@@ -88,7 +87,6 @@
             }
           },
           data: () => ({ 
-        message: 'Row',
         activeId: 0,
         answered: [],
         data: [],
@@ -96,12 +94,10 @@
       }),
           template: `
           <div>
-            <h1>{{message}} your boat</h1>
-            <button v-on:click="message += ' row'">Add</button>
-            <h3>Question: {{data[activeId].question}}</h3>
-            <input type="text">
-            <button v-for="button in buttons" :key="button" v-on:click="answerSubmit(button)">{{this.data[button].answer}}</button> <br>
-            <button  v-on:click="dataLoad()">refresh</button>
+            <h3 class="question">Question: {{data[activeId].question}}</h3>
+            <div class="buttonTray">
+              <button class="answer" v-for="button in buttons" :key="button" v-on:click="answerSubmit(button)">{{this.data[button].answer}}</button> <br>
+            </div>
           </div>
           `
         }).$mount('#content');

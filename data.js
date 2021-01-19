@@ -1,22 +1,22 @@
 data = [{
   "id": 0,
-  "question": "question One",
-  "answer": "answer 1"  
+  "question": "This directive is used to conditionally render a block. The block will only be rendered if the directive’s expression returns a truthy value.",
+  "answer": "v-if "  
 },
 {
     "id": 1,
-    "question": "question Two",
-    "answer": "answer 2"  
+    "question": "This is v-if's little brother, he renders conditionally with higher upfront cost but is quicker to toggle during run time.",
+    "answer": "v-show"  
   },
   {
     "id": 2,
-    "question": "question Three",
-    "answer": "answer 3"  
+    "question": "Directive to render a list of items based on an array.",
+    "answer": "v-for"  
   },
   {
     "id": 3,
-    "question": "question Four",
-    "answer": "answer 4"  
+    "question": "This alternative to Vue CLI install is for prototyping or learning purposes, or quickly loading view in a portion of an existing website.",
+    "answer": "Vue CDN"  
   },
   {
     "id": 4,
