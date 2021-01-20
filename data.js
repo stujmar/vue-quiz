@@ -20,12 +20,12 @@ data = [{
   },
   {
     "id": 4,
-    "question": "question Five",
-    "answer": "answer 5"  
+    "question": "This installation type of Vue will provide you with helpful tools like webpack.",
+    "answer": "Vue CLI"  
   },
   {
     "id": 5,
-    "question": "This directive binds data to a element",
+    "question": "This directive binds data to a element especially useful when passing props to a child.",
     "answer": "v-bind"  
   },
   {
