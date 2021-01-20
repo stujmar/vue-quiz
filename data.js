@@ -25,11 +25,11 @@ data = [{
   },
   {
     "id": 5,
-    "question": "question Six",
-    "answer": "answer 6"  
+    "question": "This directive binds data to a element",
+    "answer": "v-bind"  
   },
   {
     "id": 6,
-    "question": "question Seven",
-    "answer": "answer 7"  
+    "question": "We can use this directive to listen to DOM events and run some JavaScript when they’re triggered.",
+    "answer": "v-on"  
   }]
