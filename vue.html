@@ -40,10 +40,10 @@
             answerSubmit(answerId) {
               if (answerId == this.activeId) {
                 this.message = "Correct";
-                console.log("Correct");
+                this.answered = [...this.answered, answerId];
               } else {
                 this.message = "Wrong Answer";
-                console.log("Wrong Answer");
+                this.wrongGuesses = [...this.wrongGuesses, answerId];
               }
             },
             getRandomQuestion() {
@@ -95,6 +95,7 @@
           },
           data: () => ({ 
         activeId: 0,
+        wrongGuesses: [],
         answered: [],
         data: [],
         buttons: [],
