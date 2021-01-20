@@ -38,22 +38,35 @@
           },
           methods: {
             answerSubmit(answerId) {
+              console.log("you clicked a button");
               if (answerId == this.activeId) {
-                this.message = "Correct";
+                console.log("It was a correct answer");
                 this.answered = [...this.answered, answerId];
+                if (this.answered.length == this.data.length) { //if we are out of questions
+                  this.message = "Out of Questions"
+                } else {
+                  this.message = "Correct! Loading new question...";
+                  setTimeout(() => {
+                      console.log("load new question");
+                      this.getRandomQuestion();
+                      this.setButtons();
+                    }, 1000);
+                }
+                
               } else {
                 this.message = "Wrong Answer";
                 this.wrongGuesses = [...this.wrongGuesses, answerId];
               }
             },
             getRandomQuestion() {
-              console.log(this.data.length)
-              let maxNum = this.data.length;
-              let randomSeed = Math.floor(Math.random() * (maxNum));
-              console.log(randomSeed); 
+              console.log("gettingRandomQuestion");
+
+              let randomSeed;
+              do  {
+                randomSeed = Math.floor(Math.random() * (this.data.length));
+              } while (this.answered.includes(randomSeed))
               this.activeId = randomSeed;
-              this.setAnswers();
-              return randomSeed;
+              console.log(randomSeed, this.activeId);
             },
             getWrongId() {
               let idsToExclude = [...this.answered, this.activeId];
@@ -62,7 +75,7 @@
               while (idsToExclude.includes(randomId) || this.buttons.includes(randomId)) {
                 randomId = Math.floor(Math.random() * (this.data.length));
               }
-              this.buttons = [...this.buttons, randomId];
+            
               return randomId;
             },
             shuffle(array) {
@@ -85,11 +98,15 @@
             }
             ,
             setButtons() {
-              let wrongOne = this.getWrongId();
-              let wrongTwo = this.getWrongId();
-              console.log("here", this.activeId, wrongOne, wrongTwo);
+              // Get First Wrong Answer and put it in Buttons
+              this.buttons = [this.getWrongId()];
+              // Get Second Wrong Answer and put it in Buttons
+              this.buttons = [...this.buttons, this.getWrongId()];
+              // Get Right Answer and put it in Buttons.
               this.buttons = [...this.buttons, this.data[this.activeId].id];
+              // Shuffle Buttons.
               this.buttons = this.shuffle(this.buttons);
+              // Reset Win message.
               this.message = "";
             }
           },
@@ -108,6 +125,7 @@
               <button class="answer" v-for="button in buttons" :key="button" v-on:click="answerSubmit(button)">{{this.data[button].answer}}</button> <br>
             </div>
             <div class="winLose">{{message}}</div>
+            <div class="winLose">{{this.answered.length}}</div>
           </div>
           `
         }).$mount('#content');
