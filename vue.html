@@ -69,8 +69,7 @@
               console.log(randomSeed, this.activeId);
             },
             getWrongId() {
-              let idsToExclude = [...this.answered, this.activeId];
-              
+              let idsToExclude = [this.activeId];
               let randomId = Math.floor(Math.random() * (this.data.length));
               while (idsToExclude.includes(randomId) || this.buttons.includes(randomId)) {
                 randomId = Math.floor(Math.random() * (this.data.length));
@@ -98,12 +97,16 @@
             }
             ,
             setButtons() {
-              // Get First Wrong Answer and put it in Buttons
+              console.log("setting buttons");
+              // Get First Wrong Answer and put it in Buttons 
               this.buttons = [this.getWrongId()];
+              console.log("first wrong one is set");
               // Get Second Wrong Answer and put it in Buttons
               this.buttons = [...this.buttons, this.getWrongId()];
+              console.log("Second wrong one is set");
               // Get Right Answer and put it in Buttons.
               this.buttons = [...this.buttons, this.data[this.activeId].id];
+              console.log("Right answer button is set");
               // Shuffle Buttons.
               this.buttons = this.shuffle(this.buttons);
               // Reset Win message.
@@ -120,9 +123,11 @@
       }),
           template: `
           <div>
-            <h3 class="question">{{data[activeId].question}}</h3>
-            <div class="buttonTray">
-              <button class="answer" v-for="button in buttons" :key="button" v-on:click="answerSubmit(button)">{{this.data[button].answer}}</button> <br>
+            <div v-if="this.answered.length == this.data.length"> 
+              <h3 class="question">{{data[activeId].question}}</h3>
+              <div class="buttonTray">
+                <button class="answer" v-for="button in buttons" :key="button" v-on:click="answerSubmit(button)">{{this.data[button].answer}}</button> <br>
+              </div>
             </div>
             <div class="winLose">{{message}}</div>
             <div class="winLose">{{this.answered.length}}</div>
