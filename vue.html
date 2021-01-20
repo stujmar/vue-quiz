@@ -34,7 +34,6 @@
             // this.message = "loaded";
             console.log("Vue mounted");
             this.setButtons();
-
           },
           methods: {
             answerSubmit(answerId) {
@@ -123,14 +122,17 @@
       }),
           template: `
           <div>
-            <div v-if="this.answered.length == this.data.length"> 
-              <h3 class="question">{{data[activeId].question}}</h3>
-              <div class="buttonTray">
-                <button class="answer" v-for="button in buttons" :key="button" v-on:click="answerSubmit(button)">{{this.data[button].answer}}</button> <br>
+              <div v-if="this.answered.length < this.data.length"> 
+                <h3 class="question">{{data[activeId].question}}</h3>
+                <div class="buttonTray">
+                  <button class="answer" v-for="button in buttons" :key="button" v-on:click="answerSubmit(button)">{{this.data[button].answer}}</button> <br>
+                </div>
               </div>
-            </div>
-            <div class="winLose">{{message}}</div>
-            <div class="winLose">{{this.answered.length}}</div>
+              <div v-else>
+                <p>else statement</p>
+              </div>
+              <div class="winLose">{{message}}</div>
+              <div class="winLose">{{this.answered.length}}</div>
           </div>
           `
         }).$mount('#content');
