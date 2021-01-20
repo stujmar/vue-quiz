@@ -15,7 +15,7 @@ data = [{
   },
   {
     "id": 3,
-    "question": "This alternative to Vue CLI install is for prototyping or learning purposes, or quickly loading view in a portion of an existing website.",
+    "question": "This alternative to Vue CLI install is for prototyping or learning purposes, or for quickly loading view in a portion of an existing website.",
     "answer": "Vue CDN"  
   },
   {

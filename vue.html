@@ -38,7 +38,13 @@
           },
           methods: {
             answerSubmit(answerId) {
-              console.log(answerId == this.activeId);
+              if (answerId == this.activeId) {
+                this.message = "Correct";
+                console.log("Correct");
+              } else {
+                this.message = "Wrong Answer";
+                console.log("Wrong Answer");
+              }
             },
             getRandomQuestion() {
               console.log(this.data.length)
@@ -84,20 +90,23 @@
               console.log("here", this.activeId, wrongOne, wrongTwo);
               this.buttons = [...this.buttons, this.data[this.activeId].id];
               this.buttons = this.shuffle(this.buttons);
+              this.message = "";
             }
           },
           data: () => ({ 
         activeId: 0,
         answered: [],
         data: [],
-        buttons: []
+        buttons: [],
+        message: ""
       }),
           template: `
           <div>
-            <h3 class="question">Question: {{data[activeId].question}}</h3>
+            <h3 class="question">{{data[activeId].question}}</h3>
             <div class="buttonTray">
               <button class="answer" v-for="button in buttons" :key="button" v-on:click="answerSubmit(button)">{{this.data[button].answer}}</button> <br>
             </div>
+            <div class="winLose">{{message}}</div>
           </div>
           `
         }).$mount('#content');
