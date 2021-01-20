@@ -20,7 +20,7 @@
     height: 52px;
     width: 60px;
     margin-top: 10px;
-    background: url(./assets/vue.png);
+    background: url(../assets/vue.png);
     background-size: cover;
     margin-right: -7px;
 }
@@ -51,11 +51,13 @@
     display:flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
 }
 
 .answer {
-    font-weight: bold;
+    font-weight: 400;
     margin: 20px;
+    width: 150px;
     padding: 0 10px;
     border-style: inset;
     border: 1px solid rgb(0, 80, 67);

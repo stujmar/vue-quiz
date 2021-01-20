@@ -1,6 +1,6 @@
 data = [{
   "id": 0,
-  "question": "This directive is used to conditionally render a block. The block will only be rendered if the directive’s expression returns a truthy value.",
+  "question": "This directive is used to conditionally render a block. The block will only be rendered 'if' the directive’s expression returns a truthy value.",
   "answer": "v-if "  
 },
 {
