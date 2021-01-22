@@ -78,7 +78,7 @@
 }
 
 .answer:hover {
-    background: #4fc08d;   
+    background: rgb(215, 250, 241);   
 }
 
 .answer:focus {
@@ -86,6 +86,21 @@
     border-style: inset;
     border: 1px solid rgb(0, 80, 67);
     box-shadow: 0 0 0 1px rgb(0, 80, 67);
+}
+
+.footer {
+    position: fixed;
+    width: 100%;
+    font-size: .75rem;
+    bottom: 0;
+    background: rgb(215, 250, 241);
+    padding: 10px 0 20px;
+}
+
+.footer a { 
+    font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+    margin: 0 auto;
+    text-decoration: none;
 }
 
 @media only screen and (min-width: 700px) {

@@ -16,8 +16,9 @@
         <p class="title-text">ue know?</p>
     </header>
     <div  class="quiz-body">
-        <div id="content"></div>
+      <div id="content"></div>
     </div>
+    <footer class="footer"><a href="https://www.gostugo.com/">back to site</a></footer>
     <script>
         Vue.config.devtools = true
         new Vue({ 
@@ -132,7 +133,8 @@
                 <p class="winLose">You answered  {{this.answered.length}} questions with {{this.wrongGuesses.length}} wrong guesses.</p>
               </div>
               <div class="winLose">{{message}}</div>
-          </div>
+              </div>
+              
           `
         }).$mount('#content');
       </script>
